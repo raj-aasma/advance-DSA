@@ -1,21 +1,21 @@
 class Solution {
     public int maxArea(int[] height) {
-        int left = 0, right = height.length - 1;
-        int maxArea = 0;
+        int maxWater = 0;
+        int lp = 0;
+        int rp = height.length - 1;
 
-        while (left < right) {
-            // Calculate the area between the two pointers
-            int currentArea = Math.min(height[left], height[right]) * (right - left);
-            maxArea = Math.max(maxArea, currentArea);
+        while (lp < rp) {
+            int w = rp - lp;
+            int ht = Math.min(height[lp], height[rp]);
+            int currWater = w * ht;
+            maxWater = Math.max(maxWater, currWater);
 
-            // Move the pointer pointing to the shorter line
-            if (height[left] < height[right]) {
-                left++;
+            if (height[lp] < height[rp]) {
+                lp++;
             } else {
-                right--;
+                rp--;
             }
         }
-
-        return maxArea;
+        return maxWater;
     }
 }
